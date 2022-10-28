@@ -1,0 +1,137 @@
+
+<p>{{title}}</p>
+<table class="table table-dark table-sm table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Last name</th>
+    <th>Fiscal Code</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Province</th>
+    <th>Age</th>
+    <td>  </td>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td class="space">{{user?.name}}</td>
+      <td class="space">{{user?.lastname}}</td>
+      <td class="space">{{user?.fiscalcode}}</td>
+      <td class="space">{{user?.email}}</td>
+      <td class="space">{{user?.phone}}</td>
+      <td class="space">{{user?.province}}</td>
+      <td class="space">{{user?.age}}</td>
+      <td class="space" (click)="getClick(user)"> 
+        <button type="button" class="btn btn-dark"  data-toggle="modal" data-target="#info">
+          <img src="http://localhost:4201/assets/icons/arrow-up-right-circle-fill.svg">
+        </button>
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#delete">
+          <img src="http://localhost:4201/assets/icons/trash.svg">
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal Vista Utenti -->
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="infoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoLabel">Utente {{singleUser?.id}}</h5>
+        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="card-title mb-3">{{singleUser?.name}} {{singleUser?.lastname}}</h5>
+        <p class="card-text">Name: {{singleUser?.fiscalcode}}</p>
+        <p class="card-text">Email {{singleUser?.email}}</p>
+        <p class="card-text">Cell: {{singleUser?.phone}}</p>
+        <p class="card-text">Prov: {{singleUser?.province}}</p>
+        <p class="card-text">Età: {{singleUser?.age}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-dismiss="modal" data-target="#modify">Modifica</button>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Modifica Utenti -->
+<div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="modifyLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifyLabel">Utente {{singleUser?.id}}</h5>
+        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input formControlName="name" type="text" class="form-control" id="name" placeholder="name">
+          </div>
+          <div class="form-group">
+            <label for="lastname">Last name</label>
+            <input formControlName="lastname" type="text" class="form-control" id="lastname" placeholder="last name">
+          </div>
+          <div class="form-group">
+            <label for="fiscalcode">Fiscal Code</label>
+            <input formControlName="fiscalcode" type="text" class="form-control" id="fiscalcode" placeholder="fiscal code">
+          </div>
+          <div class="form-group">
+            <label for="email">	Email</label>
+            <input formControlName="email"  type="text" class="form-control" id="email" placeholder="email">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input formControlName="phone"  type="number" class="form-control" id="phone" placeholder="phone">
+          </div>
+          <div class="form-group">
+            <label for="province">Province</label>
+            <input formControlName="province" type="text" class="form-control" id="province" placeholder="province">
+          </div>
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input formControlName="age" type="number" class="form-control" id="age" placeholder="age">
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modifyUser()">Modifica</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Delete -->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteLabel">Elimina Utente</h5>
+        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="card-title mb-3">{{singleUser?.name}} {{singleUser?.lastname}}</h5>
+        <p class="card-text">{{singleUser?.fiscalcode}}</p>
+        <p class="card-text">{{singleUser?.email}}</p>
+        <p class="card-text">{{singleUser?.phone}}</p>
+        <p class="card-text">{{singleUser?.province}}</p>
+        <p class="card-text">{{singleUser?.age}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onDeleteUser(singleUser.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

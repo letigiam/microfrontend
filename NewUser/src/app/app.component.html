@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New User</title>
+</head>
+  <body>
+    <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>{{title}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">            
+            <form [formGroup]="userForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input formControlName="name" type="text" class="form-control" id="name" placeholder="name">
+              </div>
+              <div class="form-group">
+                <label for="lastname">Last name</label>
+                <input formControlName="lastname" type="text" class="form-control" id="lastname" placeholder="last name">
+              </div>
+              <div class="form-group">
+                <label for="fiscalcode">Fiscal Code</label>
+                <input formControlName="fiscalcode" type="text" class="form-control" id="fiscalcode" placeholder="fiscal code">
+              </div>
+              <div class="form-group">
+                <label for="email">	Email</label>
+                <input formControlName="email"  type="text" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input formControlName="phone"  type="number" class="form-control" id="phone" placeholder="phone">
+              </div>
+              <div class="form-group">
+                <label for="province">Province</label>
+                <input formControlName="province" type="text" class="form-control" id="province" placeholder="province">
+              </div>
+              <div class="form-group">
+                <label for="age">Age</label>
+                <input formControlName="age" type="number" class="form-control" id="age" placeholder="age">
+              </div>
+              <br>
+              <div class="form-group form-footer row mt-3">
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-lg btn-primary" [routerLink] ="['/home']">Home</button>
+                </div>
+                <div class="col-md-4">
+                  <!-- <button type="button" class="btn btn-lg btn-outline-secondary" (click)="resetForm()">Clear</button> -->
+                </div>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-lg btn-success" (click)="saveUser()">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
