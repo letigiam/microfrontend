@@ -4,6 +4,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, Que
 import { User } from '../classes/User';
 import { UserService } from '../services/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class UsersComponent implements OnInit {
   userForm: FormGroup;
 
   constructor( private service: UserService, public fb: FormBuilder, ) {
+
     this.userForm = this.fb.group({
       id: null,
 			name: null,
@@ -35,6 +37,7 @@ export class UsersComponent implements OnInit {
       province: null,
       age: null,
 		});
+
   }
 
   ngOnInit(): void { 
@@ -43,27 +46,35 @@ export class UsersComponent implements OnInit {
 
 
   getClick(element: any) {
+    
     this.singleUser = element;
     this.service.getUser(element.id).subscribe( response =>{
       this.userForm.patchValue({
         id: element.id,
-        name: response.name,
-        lastname: response.lastname,
-        fiscalcode: response.fiscalcode,
-        email: response.email,
-        phone: response.phone,
-        province: response.province,
-        age: response.age
+        name: response.result.name,
+        lastname: response.result.lastname,
+        fiscalcode: response.result.fiscalcode,
+        email: response.result.email,
+        phone: response.result.phone,
+        province: response.result.province,
+        age: response.result.age
       })
     })
   }
   
   getUsers(){
-    this.service.getUsers().subscribe( response => this.users = response)
+    this.service.getUsers().subscribe( response => this.users = response.result)
   }
 
   modifyUser(){
-    this.service.updateUser(this.userForm.value).subscribe( res => {
+    this.service.updateUser(this.userForm.value).subscribe( res => {    
+      if(res.status == true) {
+        Swal.fire(
+          'Good job!',
+          'User Update!',
+          'success'
+        )
+      }
       this.getUsers();
     })
   }
